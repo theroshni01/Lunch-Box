@@ -75,7 +75,7 @@ app.get('/plans', async (req,res) =>
 {
     try {
         const plans = await PlanModel.find({})
-        // console.log(plans)
+        console.log(plans)
         res.json({
             success: true,
             plans
