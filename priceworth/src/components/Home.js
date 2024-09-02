@@ -21,7 +21,7 @@ function Home( {cartItems, setCartItems}) {
     useEffect(() =>{
         fetch(process.env.REACT_APP_URL+"/plans" ,
 	      {
-		      mode : 'no cors'
+		      mode : 'no-cors'
 	      })
         .then(res => res.json())
         .then(res => setPlans(res.plans))
