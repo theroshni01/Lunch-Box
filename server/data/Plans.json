@@ -1,0 +1,55 @@
+[{
+    "title": "Only Breakfast",
+    "category": "Weekdays",
+    "text":"Monthly subscription for one person",
+    "price1": 2000
+  },
+  {
+    "title": "Only Breakfast",
+    "category": "Weekend",
+    "text":"Monthly subscription for one person",
+    "price2": 1000
+  },
+  {
+    "title": "Only Breakfast",
+    "category": "alldays",
+    "text":"Monthly subscription for one person",
+    "price": 3000
+  },
+  {
+    "title": "Only Lunch",
+    "category": "Weekdays",
+    "text":"Monthly subscription for one person",
+    "price": 2500
+  },
+  {
+    "title": "Only Lunch",
+    "category": "Weekend",
+    "text":"Monthly subscription for one person",
+    "price": 1250
+  },
+  {
+    "title": "Only Lunch",
+    "category": "alldays",
+    "text":"Monthly subscription for one person",
+    "price": 3750
+  },
+  {
+    "title": "Only Dinner",
+    "category": "Weekdays",
+    "text":"Monthly subscription for one person",
+    "price": 2000
+  },
+  {
+    "title": "Only Dinner",
+    "category": "Weekend",
+    "text":"Monthly subscription for one person",
+    "price": 1000
+  },
+  {
+    "title": "Only Dinner",
+    "category": "alldays",
+    "text":"Monthly subscription for one person",
+    "price": 3000
+  }
+]
