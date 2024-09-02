@@ -12,11 +12,14 @@ function Login({ setIsLoggedIn}) {
 
 	const handleLogin = (e) => {
         e.preventDefault();
-        axios.post(process.env.REACT_APP_URL+"/login", 
-		{ 
-			username, 
-			password 
-		}, { withCredentials: true })
+	let data = JSON.stringify({
+  		username: this.state.username,
+  		password: password
+	});
+
+const result =  axios.post(process.env.REACT_APP_URL+"/login", data, 
+		{headers:{"Content-Type" : "application/json"}}, 
+		{ withCredentials: true })
             .then(result => {
 				if (result.status === 201) {
                     
