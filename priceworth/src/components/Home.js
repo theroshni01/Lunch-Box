@@ -42,41 +42,6 @@ function Home( {cartItems, setCartItems}) {
 		<h1 class="heading"> Menu <span>List</span> </h1>
 	
 		<div class="box-container">
-	
-			{/* <div class="box">
-				<h3>Break Fast Menu</h3>
-				<p><ul>
-                    <li>Idli</li>
-                    <li>Dosa</li>
-                    <li>Poori</li>
-                    <li>Lemon Rice</li>
-                    <li>Variety Rice</li>
-                    <li>Paddu</li>
-                </ul></p>
-				<a href="#" class="btn">Subscribe now</a>
-			</div>
-			<div class="box">
-				<h3>Lunch Menu</h3>
-                <p><ul>
-                    <li>White Rice</li>
-                    <li>Curry Varieties</li>
-                    <li>Tomato Rice</li>
-                    <li>Lemon Rice</li>
-                    <li>Biriyani</li>
-                    <li>Dhal & Rasam</li>
-                </ul></p>
-				<a href="#" class="btn">Subscribe now</a>
-			</div>
-			<div class="box">
-				<h3>Dinner Menu</h3>
-                <p><ul>
-                    <li>White Rice</li>
-                    <li>Chappathi</li>
-                    <li>Dhal & Sabzi</li>
-                    <li>Butter milk</li>
-                </ul></p>
-				<a href="#" class="btn">Subscribe now</a>
-			</div> */}
 
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -206,109 +171,12 @@ function Home( {cartItems, setCartItems}) {
 	
 		</div>
     </section>
-    {/* <section class="features" id="products">
-	
-        {/* <h1 class="heading"> our <span>Plans</span> </h1> 
-        <h1 class="heading"> Only <span>Break Fast</span> </h1>
-        <div class="box-container">
-         <div class="row">
-          <div class="col-sm-4 mb-3 mb-sm-0">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Weekdays(5 Days) </h5>
-                <p class="card-text">Monthly Subcription for one person</p>
-                <p class="card-text">2000 Rs.</p>
-                <a href="/subscription" class="btn btn-primary">Purchase</a>
-              </div>
-            </div>
-          </div>
-      </div>
-
-        </div>
-
-        <h1 class="heading"> Only <span>Lunch</span> </h1>
-        <div class="box-container">
-
-      <div class="row">
-        <div class="col-sm-4 mb-3 mb-sm-0">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Weekdays(5 Days) </h5>
-              <p class="card-text">Monthly Subcription for one person</p>
-              <p class="card-text">2500 Rs.</p>
-              <a href="/subscription" class="btn btn-primary">Purchase</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Weekend(2 Days)</h5>
-              <p class="card-text">Monthly Subcription for one person</p>
-              <p class="card-text">1250 Rs.</p>
-              <a href="/subscription" class="btn btn-primary">Purchase</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">All Days(7 Days)</h5>
-                <p class="card-text">Monthly Subcription for one person</p>
-                <p class="card-text">3750 Rs.</p>
-                <a href="/subscription" class="btn btn-primary">Purchase</a>
-              </div>
-            </div>
-          </div>
-      </div>
-
-        </div>
-
-        <h1 class="heading"> Only <span>Dinner</span> </h1>
-        <div class="box-container">
-
-      <div class="row">
-        <div class="col-sm-4 mb-3 mb-sm-0">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Weekdays(5 Days) </h5>
-              <p class="card-text">Monthly Subcription for one person</p>
-              <p class="card-text">2000 Rs.</p>
-              <a href="/subscription" class="btn btn-primary">Purchase</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Weekend(2 Days)</h5>
-              <p class="card-text">Monthly Subcription for one person</p>
-              <p class="card-text">1000 Rs.</p>
-              <a href="/subscription" class="btn btn-primary">Purchase</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">All Days(7 Days)</h5>
-                <p class="card-text">Monthly Subcription for one person</p>
-                <p class="card-text">3000 Rs.</p>
-                <a href="/subscription" class="btn btn-primary">Purchase</a>
-              </div>
-            </div>
-          </div>
-      </div>
-
-        </div>
-
-    </section> */}
 
     {/* Plans Detals */}
     <section class="features mt-5" id="products">
       <h1 className="heading"> our <span>Plans</span> </h1>
         <div className="row">
-          {plans.map(plan => <Plans plan={plan} cartItems={cartItems} setCartItems={setCartItems} />)}
+          {plans && plans.map(plan => <Plans plan={plan} cartItems={cartItems} setCartItems={setCartItems} />)}
         </div>
     </section>
 
