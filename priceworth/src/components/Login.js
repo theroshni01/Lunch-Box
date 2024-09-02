@@ -12,7 +12,7 @@ function Login({ setIsLoggedIn}) {
 
 	const handleLogin = (e) => {
         e.preventDefault();
-        axios.post(REACT_APP_URL+"/login", 
+        axios.post(process.env.REACT_APP_URL+"/login", 
 		{ 
 			username, 
 			password 
@@ -23,7 +23,7 @@ function Login({ setIsLoggedIn}) {
 					navigate("/");
 				}
                 if (result.data === "Success") {
-                    axios.get(REACT_APP_URL+"/user", { withCredentials: true })
+                    axios.get(process.env.REACT_APP_URL+"/user", { withCredentials: true })
                         .then(response => {
                             if (response.data.user) {
                               setIsLoggedIn(true);
