@@ -9,6 +9,8 @@ const UserModel = require("./model/User");
 const UserSubModel = require("./model/Subscription")
 const PlanModel = require('./model/Plans')
 
+const port = process.env.PORT || 3001 ;
+
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -41,8 +43,8 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
 }));
 
-app.listen(process.env.URL, () => {
-    console.log(`Server is running on ${process.env.URL}`);
+app.listen(port , () => {
+    console.log(`Server is running on ${port}`);
 });
 
 app.post("/login", async (req, res) => {
