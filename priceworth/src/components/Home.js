@@ -23,7 +23,7 @@ function Home( {cartItems, setCartItems}) {
 	      {
 		      mode : 'no-cors'
 	      })
-        // .then(res => res.json())
+        .then(res => res.json())
         .then(res => setPlans(res.plans))
     })
 
