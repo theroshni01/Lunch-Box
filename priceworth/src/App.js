@@ -18,7 +18,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-      axios.get('http://localhost:3001/user', { withCredentials: true })
+      axios.get('https://lunch-box-backend.onrender.com/user', { withCredentials: true })
           .then(response => {
               if (response.data.user) {
                   setIsLoggedIn(true);
