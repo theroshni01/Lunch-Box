@@ -14,19 +14,17 @@ const port = process.env.PORT || 3001 ;
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: 'https://lunch-box-app.onrender.com/', // Replace with your frontend's URL
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'https://lunch-box-app.onrender.com/', // Replace with your frontend's URL
+//     credentials: true
+// }));
 
-  // app.use(function (req, res, next) {
-  //   //Enabling CORS
-  //   res.header("Access-Control-Allow-Origin", "*");
-  //   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, 
-  //   Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-  //     next();
-  //   });
+const corsOptions ={
+    origin:'https://lunch-box-app.onrender.com', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
