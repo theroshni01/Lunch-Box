@@ -12,11 +12,10 @@ const PlanModel = require('./model/Plans')
 dotenv.config();
 const app = express();
 app.use(express.json());
-// app.use(cors({
-//     origin: 'https://lunch-box-app.onrender.com/', // Replace with your frontend's URL
-//     credentials: true
-// }));
-app.use(cors())
+app.use(cors({
+    origin: 'https://lunch-box-app.onrender.com/', // Replace with your frontend's URL
+    credentials: true
+}));
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
