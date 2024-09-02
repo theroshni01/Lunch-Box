@@ -8,7 +8,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn, cartItems })
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-        axios.post(REACT_APP_URL+"/logout", {}, { withCredentials: true })
+        axios.post(process.env.REACT_APP_URL+"/logout", {}, { withCredentials: true })
             .then(response => {
                 if (response.status === 200) {
                     setIsLoggedIn(false);
