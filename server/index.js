@@ -33,8 +33,8 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
 }));
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+app.listen(process.env.URL, () => {
+    console.log(`Server is running on ${process.env.URL}`);
 });
 
 app.post("/login", async (req, res) => {
