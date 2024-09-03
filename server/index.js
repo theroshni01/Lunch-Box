@@ -19,7 +19,7 @@ const corsOptions = {
     origin: 'https://lunch-box-app.onrender.com', 
     credentials: true,            // access-control-allow-credentials:true
     optionsSuccessStatus: 200
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 app.use(cors(corsOptions));
