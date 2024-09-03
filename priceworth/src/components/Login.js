@@ -14,7 +14,7 @@ function Login({ setIsLoggedIn }) {
         
         try {
             const response = await axios.post(
-                `${process.env.REACT_APP_URL}/login`,
+                process.env.REACT_APP_URL+'/login',
                 JSON.stringify({ username, password }),
                 {
                     headers: { "Content-Type": "application/json" },
@@ -24,7 +24,7 @@ function Login({ setIsLoggedIn }) {
 
             if (response.status === 201) {
                 const userResponse = await axios.get(
-                    `${process.env.REACT_APP_URL}/user`,
+                    process.env.REACT_APP_URL+'/user',
                     { withCredentials: true }
                 );
 
