@@ -19,11 +19,10 @@ function Home( {cartItems, setCartItems}) {
   const [plans, setPlans] = useState([]);
 
     useEffect(() =>{
-        fetch(process.env.REACT_APP_URL+"/plans" )
-		
-	      // {
-		     //  mode : 'no-cors'
-	      // }
+        fetch(process.env.REACT_APP_URL+"/plans" ,
+	      {
+		      mode : 'no-cors'
+	      })
         // .then(res => res.json())
         .then(res => setPlans(res.plans))
     })
