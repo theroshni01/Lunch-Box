@@ -5,9 +5,7 @@
             "destination": "/index.html"
         }
     ]
-}
-
-{
+    
   "headers": [
     {
       "source": "/(.*)",
