@@ -16,7 +16,7 @@ app.use(express.json());
 
 // CORS Configuration
 const corsOptions = {
-    origin: 'https://lunch-box-app.onrender.com', 
+    origin: process.env.FRONT_URL, 
     credentials: true,            // access-control-allow-credentials:true
     optionsSuccessStatus: 200
 };
