@@ -9,37 +9,30 @@ function Login({ setIsLoggedIn }) {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+   
+	const handleLogin = (e) => {
         e.preventDefault();
-        
-        try {
-            const response = await axios.post(
-                process.env.REACT_APP_URL+'/login',
-                JSON.stringify({ username, password }),
-                {
-                    headers: { "Content-Type": "application/json" },
-                    withCredentials: true
+        axios.post(process.env.REACT_APP_URL+"/login", 
+		{ 
+			username, 
+			password 
+		}, { withCredentials: true })
+            .then(result => {
+                if (result.status === 201) {
+                    axios.get(process.env.REACT_APP_URL+'/user', { withCredentials: true })
+                        .then(response => {
+                            if (response.data.user) {
+                              setIsLoggedIn(true);
+                              alert("Login Successfull")
+                              navigate("/", { state: { user: response.data.user } });
+                            }
+                        });
+				}
+                 else {
+                    alert("Login failed");
                 }
-            );
-
-            if (response.status === 201) {
-                const userResponse = await axios.get(
-                    process.env.REACT_APP_URL+'/user',
-                    { withCredentials: true }
-                );
-
-                if (userResponse.data.user) {
-                    setIsLoggedIn(true);
-                    alert('Login Successful');
-                    navigate('/', { state: { user: userResponse.data.user } });
-                }
-            } else {
-                alert('Login failed');
-            }
-        } catch (err) {
-            console.log(err);
-            alert('An error occurred');
-        }
+            })
+            .catch(err => console.log(err));
     };
 
     return (
