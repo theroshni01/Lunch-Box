@@ -36,8 +36,6 @@ app.use(session({
         mongoUrl: process.env.MONGO_URI
     }),
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
-    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-    sameSite: 'None' // or 'Lax', or 'Strict', depending on your needs
 }));
 
 const port = process.env.PORT || 3001;
