@@ -20,9 +20,6 @@ function App() {
   useEffect(() => {
       axios.get(process.env.REACT_APP_URL+'/user', 
                 {
-                  header: {
-                      "Allow-Accsess-Control-Origin": "*",
-                  }
                   withCredentials: true 
                 })
           .then(response => {
