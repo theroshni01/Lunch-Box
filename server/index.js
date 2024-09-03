@@ -19,6 +19,8 @@ const corsOptions = {
     origin: 'https://lunch-box-app.onrender.com', 
     credentials: true,            // access-control-allow-credentials:true
     optionsSuccessStatus: 200
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 app.use(cors(corsOptions));
 
@@ -36,6 +38,8 @@ app.use(session({
         mongoUrl: process.env.MONGO_URI
     }),
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
+    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    sameSite: 'None' // or 'Lax', or 'Strict', depending on your needs
 }));
 
 const port = process.env.PORT || 3001;
@@ -132,6 +136,7 @@ app.post("/logout", (req, res) => {
 
 // User Route
 app.get('/user', (req, res) => {
+     console.log('Session:', req.session);
     if (req.session.user) {
         res.json({ user: req.session.user });
     } else {
