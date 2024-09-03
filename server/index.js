@@ -16,8 +16,8 @@ app.use(express.json());
 
 // CORS Configuration
 const corsOptions = {
-    origin: "*", 
-    // "Access-Control-Allow-Origin", "*",
+    origin: process.env.FRONT_URL, 
+    "Access-Control-Allow-Origin", "*",
     credentials: true,            // access-control-allow-credentials:true
     optionsSuccessStatus: 200
 };
