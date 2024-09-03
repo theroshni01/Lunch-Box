@@ -6,33 +6,30 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const UserModel = require("./model/User");
-const UserSubModel = require("./model/Subscription")
-const PlanModel = require('./model/Plans')
-
-const port = process.env.PORT || 3001 ;
+const UserSubModel = require("./model/Subscription");
+const PlanModel = require('./model/Plans');
 
 dotenv.config();
+
 const app = express();
 app.use(express.json());
-// app.use(cors({
-//     origin: 'https://lunch-box-app.onrender.com/', // Replace with your frontend's URL
-//     credentials: true
-// }));
 
-const corsOptions ={
-    origin:'https://lunch-box-app.onrender.com', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
+// CORS Configuration
+const corsOptions = {
+    origin: 'https://lunch-box-app.onrender.com', 
+    credentials: true,            // access-control-allow-credentials:true
+    optionsSuccessStatus: 200
+};
 app.use(cors(corsOptions));
 
+// Database Connection
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Failed to connect to MongoDB', err));
 
-
+// Session Management
 app.use(session({
-    secret: "Never Mind",
+    secret: process.env.SESSION_SECRET || "Never Mind",  // Use a secret from environment variables for better security
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
@@ -41,26 +38,28 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
 }));
 
-app.listen(port , () => {
-    console.log(`Server is running on ${port}`);
+const port = process.env.PORT || 3001;
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
 
+// Login Route
 app.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
         const user = await UserModel.findOne({ username });
+        
         if (user) {
             const passwordMatch = await bcrypt.compare(password, user.password);
             if (passwordMatch) {
                 req.session.user = { id: user._id, username: user.username };
-                // console.log(email);
                 console.log(user.username);
-                res.json("Success");
+                res.status(200).json("Success");
             } else {
                 res.status(401).json("Password doesn't match");
             }
-        } 
-        else {
+        } else {
             const hashedPassword = await bcrypt.hash(password, 10);
             const newUser = new UserModel({ username, password: hashedPassword });
             const savedUser = await newUser.save();
@@ -71,60 +70,52 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get('/plans', async (req,res) =>
-{
+// Plans Routes
+app.get('/plans', async (req, res) => {
     try {
-        const plans = await PlanModel.find({})
-        // console.log(plans)
-        res.json({
-            success: true,
-            plans
-        })
-    } 
-    catch (error) {
-        res.json({
-            success: false,
-            message: "Unable to get the plans"
-        })
-    }
-})
-
-app.get('/plans/:id', async (req,res) =>
-{
-    try {
-        const plan = await PlanModel.findById(req.param.id)
-        res.json({
-            success: true,
-            plan
-        })
+        const plans = await PlanModel.find({});
+        res.json({ success: true, plans });
     } catch (error) {
-        res.json({
-            success: false,
-            message: "Unable to get the plan with id"
-        })
+        res.status(500).json({ success: false, message: "Unable to get the plans" });
     }
-
-})
-
-app.post("/subscription", async (req, res) => {
-    try {
-        const { name, number, person, address, subcription, food} = req.body;
-        const newSubc = new UserSubModel({ name, number, person, address, subcription, food });
-        const savedUserSub = await newSubc.save();
-        res.status(201).json(savedUserSub);
-    } 
-    catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-        
 });
 
-app.get('/getCart', (req, res) =>
-{
-    UserSubModel.find()
-} )
+app.get('/plans/:id', async (req, res) => {
+    try {
+        const plan = await PlanModel.findById(req.params.id);
+        if (plan) {
+            res.json({ success: true, plan });
+        } else {
+            res.status(404).json({ success: false, message: "Plan not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Unable to get the plan with id" });
+    }
+});
 
+// Subscription Route
+app.post("/subscription", async (req, res) => {
+    try {
+        const { name, number, person, address, subscription, food } = req.body;
+        const newSubc = new UserSubModel({ name, number, person, address, subscription, food });
+        const savedUserSub = await newSubc.save();
+        res.status(201).json(savedUserSub);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
+// Get Cart Route
+app.get('/getCart', async (req, res) => {
+    try {
+        const cartItems = await UserSubModel.find();
+        res.json({ success: true, cartItems });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Unable to get cart items" });
+    }
+});
+
+// Logout Route
 app.post("/logout", (req, res) => {
     if (req.session) {
         req.session.destroy(err => {
@@ -139,6 +130,7 @@ app.post("/logout", (req, res) => {
     }
 });
 
+// User Route
 app.get('/user', (req, res) => {
     if (req.session.user) {
         res.json({ user: req.session.user });
