@@ -21,10 +21,10 @@ const result =  axios.post(process.env.REACT_APP_URL+"/login", data,
 		{headers:{"Content-Type" : "application/json"}}, 
 		{ withCredentials: true })
             .then(result => {
-				if (result.status === 201) {
+				// if (result.status === 201) {
                     
-					navigate("/");
-				}
+				// 	navigate("/");
+				// }
                 if (result.data === "Success") {
                     axios.get(process.env.REACT_APP_URL+"/user", { withCredentials: true })
                         .then(response => {
