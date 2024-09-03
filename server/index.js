@@ -23,11 +23,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); 
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.FRONT_URL ); // Adjust this as needed
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+app.get("/", (req, res) => {
+res.setHeader("Access-Control-Allow-Origin", "*")
+res.setHeader("Access-Control-Allow-Credentials", "true");
+res.setHeader("Access-Control-Max-Age", "1800");
+res.setHeader("Access-Control-Allow-Headers", "content-type");
+res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+ });
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
@@ -141,12 +143,7 @@ app.post("/logout", (req, res) => {
 app.get('/user', (req, res) => {
      console.log('Session:', req.session);
     if (req.session.user) {
-        res.setHeader("Access-Control-Allow-Origin", "*")
-        res.setHeader("Access-Control-Allow-Credentials", "true");
-        res.setHeader("Access-Control-Max-Age", "1800");
-        res.setHeader("Access-Control-Allow-Headers", "content-type");
-        res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
-        res.json({ user: req.session.user });
+       res.json({ user: req.session.user });
     } else {
         res.status(401).json("Not authenticated");
     }
