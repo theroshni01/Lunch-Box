@@ -18,8 +18,9 @@ function Login({ setIsLoggedIn}) {
 	});
 
 const result =  axios.post(process.env.REACT_APP_URL+"/login", data, 
+			   { withCredentials: true },
 		{headers:{"Content-Type" : "application/json"}}, 
-		{ withCredentials: true })
+		)
             .then(result => {
                 if (result.status === 201 || result.data === "Success") {
                     axios.get(process.env.REACT_APP_URL+"/user", { withCredentials: true })
