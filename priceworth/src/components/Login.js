@@ -13,7 +13,7 @@ function Login({ setIsLoggedIn}) {
 	const handleLogin = (e) => {
         e.preventDefault();
 	let data = JSON.stringify({
-  		username: this.state.username,
+  		username: username,
   		password: password
 	});
 
