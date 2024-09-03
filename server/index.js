@@ -55,7 +55,7 @@ app.post("/login", async (req, res) => {
             if (passwordMatch) {
                 req.session.user = { id: user._id, username: user.username };
                 console.log(user.username);
-                res.status(200).json("Success");
+                res.status(201).json("Success");
             } else {
                 res.status(401).json("Password doesn't match");
             }
