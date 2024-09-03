@@ -13,13 +13,14 @@ import butter from '../assets/buttermilk.jpeg'
 import poori from '../assets/poori1.png'
 import lemon from '../assets/lemon.png'
 import Plans from './Plans'
+import axios from 'axios' 
 
 function Home( {cartItems, setCartItems}) {
 
   const [plans, setPlans] = useState([]);
 
     useEffect(() =>{
-        fetch(process.env.REACT_APP_URL+"/plans" ,
+        axios.get(process.env.REACT_APP_URL+"/plans" ,
 	      {
 		      mode : 'no-cors'
 	      })
