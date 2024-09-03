@@ -18,7 +18,13 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-      axios.get(process.env.REACT_APP_URL+'/user', { withCredentials: true })
+      axios.get(process.env.REACT_APP_URL+'/user', 
+                {
+                  header: {
+                      "Allow-Accsess-Control-Origin": "*",
+                  }
+                  withCredentials: true 
+                })
           .then(response => {
               if (response.data.user) {
                   setIsLoggedIn(true);
