@@ -22,6 +22,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn, cartItems })
     };
 
   return (
+	  <Fragment>
    <div className='nav'>
         <header className="header">
 		<a href="/" className="logo">Price Worth</a>
@@ -66,6 +67,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn, cartItems })
 	
 	</header>
    </div>
+</Fragment>
   )
 }
 
